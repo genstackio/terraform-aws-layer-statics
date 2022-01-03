@@ -10,11 +10,20 @@ output "dns3" {
 output "cloudfront_id" {
   value = module.website.cloudfront_id
 }
+output "cloudfront_arn" {
+  value = module.website.cloudfront_arn
+}
 output "cloudfront2_id" {
   value = module.website2.cloudfront_id
 }
+output "cloudfront2_arn" {
+  value = module.website2.cloudfront_arn
+}
 output "cloudfront3_id" {
   value = module.website3.cloudfront_id
+}
+output "cloudfront3_arn" {
+  value = module.website3.cloudfront_arn
 }
 output "bucket3_id" {
   value = module.website3.bucket_id
