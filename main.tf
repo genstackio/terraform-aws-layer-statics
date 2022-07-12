@@ -58,10 +58,10 @@ resource "aws_cloudfront_cache_policy" "cache" {
   default_ttl              = 3600
   max_ttl                  = 86400
 
-  enable_accept_encoding_brotli = true
-  enable_accept_encoding_gzip   = true
-  
   parameters_in_cache_key_and_forwarded_to_origin {
+    enable_accept_encoding_brotli = true
+    enable_accept_encoding_gzip   = true
+
     cookies_config {
       cookie_behavior = "none"
     }
