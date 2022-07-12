@@ -1,6 +1,6 @@
 module "website" {
   source              = "genstackio/website/aws"
-  version             = "0.3.3"
+  version             = "0.3.4"
   name                = var.name
   bucket_name         = var.bucket_name
   zone                = var.dns_zone
@@ -9,6 +9,7 @@ module "website" {
   error_404_page_path = "/404.html"
   geolocations        = []
   bucket_cors         = true
+  origin_request_policy_id = data.aws_cloudfront_origin_request_policy.managed_cors_s3_origin.id
   providers           = {
     aws     = aws
     aws.acm = aws.acm
@@ -16,7 +17,7 @@ module "website" {
 }
 module "website2" {
   source              = "genstackio/website/aws"
-  version             = "0.3.3"
+  version             = "0.3.4"
   name                = var.name2
   bucket_name         = var.bucket2_name
   zone                = var.dns2_zone
@@ -25,6 +26,7 @@ module "website2" {
   error_404_page_path = "/404.html"
   geolocations        = []
   bucket_cors         = true
+  origin_request_policy_id = data.aws_cloudfront_origin_request_policy.managed_cors_s3_origin.id
   providers           = {
     aws     = aws
     aws.acm = aws.acm
@@ -32,13 +34,14 @@ module "website2" {
 }
 module "website3" {
   source              = "genstackio/website/aws"
-  version             = "0.3.3"
+  version             = "0.3.4"
   name                = var.name3
   bucket_name         = var.bucket3_name
   zone                = var.dns3_zone
   dns                 = var.dns3
   geolocations        = []
   bucket_cors         = true
+  origin_request_policy_id = data.aws_cloudfront_origin_request_policy.managed_cors_s3_origin.id
   providers           = {
     aws     = aws
     aws.acm = aws.acm
