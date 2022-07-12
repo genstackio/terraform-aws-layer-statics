@@ -57,8 +57,10 @@ resource "aws_cloudfront_cache_policy" "cache" {
   min_ttl                  = 0
   default_ttl              = 3600
   max_ttl                  = 86400
-  compress                 = true
 
+  enable_accept_encoding_brotli = true
+  enable_accept_encoding_gzip   = true
+  
   parameters_in_cache_key_and_forwarded_to_origin {
     cookies_config {
       cookie_behavior = "none"
