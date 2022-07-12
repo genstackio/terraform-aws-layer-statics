@@ -9,6 +9,7 @@ module "website" {
   error_404_page_path = "/404.html"
   geolocations        = []
   bucket_cors         = true
+  cache_policy_id     = aws_cloudfront_cache_policy.cache.id
   origin_request_policy_id = data.aws_cloudfront_origin_request_policy.managed_cors_s3_origin.id
   providers           = {
     aws     = aws
@@ -26,6 +27,7 @@ module "website2" {
   error_404_page_path = "/404.html"
   geolocations        = []
   bucket_cors         = true
+  cache_policy_id     = aws_cloudfront_cache_policy.cache.id
   origin_request_policy_id = data.aws_cloudfront_origin_request_policy.managed_cors_s3_origin.id
   providers           = {
     aws     = aws
@@ -41,9 +43,31 @@ module "website3" {
   dns                 = var.dns3
   geolocations        = []
   bucket_cors         = true
+  cache_policy_id     = aws_cloudfront_cache_policy.cache.id
   origin_request_policy_id = data.aws_cloudfront_origin_request_policy.managed_cors_s3_origin.id
   providers           = {
     aws     = aws
     aws.acm = aws.acm
+  }
+}
+
+resource "aws_cloudfront_cache_policy" "cache" {
+  name        = "${var.name}-cache-policy"
+
+  min_ttl                  = 0
+  default_ttl              = 3600
+  max_ttl                  = 86400
+  compress                 = true
+
+  parameters_in_cache_key_and_forwarded_to_origin {
+    cookies_config {
+      cookie_behavior = "none"
+    }
+    headers_config {
+      header_behavior = "none"
+    }
+    query_strings_config {
+      query_string_behavior = "none"
+    }
   }
 }
